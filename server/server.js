@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 connectDB();
 
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = ["https://mern-authentication-app-1-o77z.onrender.com"];
 
 app.use(express.json()); // will allow to convert data in json format{data sent from frontend to backend in json format} to javascript object in order to use it in your code
 app.use(cookieParser());
