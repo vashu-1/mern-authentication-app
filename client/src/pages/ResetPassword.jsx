@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
@@ -10,7 +10,7 @@ const ResetPassword = () => {
   axios.defaults.withCredentials = true;
 
   const navigate = useNavigate();
-  const inputRefs = React.useRef([]);
+  const inputRefs = useRef([]);
 
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
