@@ -13,8 +13,9 @@ connectDB();
 
 const allowedOrigins = [
   "https://mern-authentication-app-1-o77z.onrender.com",
+  "https://mern-authentication-app-uhjm.onrender.com",
   "http://localhost:5173",
-  ,
+  "http://localhost:3000",
 ];
 
 app.use(express.json()); // will allow to convert data in json format{data sent from frontend to backend in json format} to javascript object in order to use it in your code
