@@ -20,9 +20,38 @@ const allowedOrigins = [
 
 app.use(express.json()); // will allow to convert data in json format{data sent from frontend to backend in json format} to javascript object in order to use it in your code
 app.use(cookieParser());
-app.use(cors({ origin: allowedOrigins, credentials: true }));
 
-app.options('*', cors())
+// More comprehensive CORS setup
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      // Check if the origin is in our allowed list
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        console.log("Blocked origin:", origin);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+  })
+);
+
+// Handle preflight requests
+app.options(
+  "*",
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+  })
+);
 
 //API endpoints
 app.get("/", (req, res) => {
