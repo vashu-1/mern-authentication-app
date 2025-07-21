@@ -17,6 +17,8 @@ app.use(express.json()); // will allow to convert data in json format{data sent 
 app.use(cookieParser());
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 
+app.options('*', cors())
+
 //API endpoints
 app.get("/", (req, res) => {
   res.send("API WORKING");
